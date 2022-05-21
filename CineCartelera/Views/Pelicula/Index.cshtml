@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CineCartelera.Models.Pelicula>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class=" conatiner p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-light">Lista de Películas</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Pelicula" asp-action="Upsert" class="btn btn-primary">Película Nueva</a>
+            
+
+
+        </div>
+    </div>
+
+    <br />
+
+    @if(Model.Count()>0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Genero
+                    </th>
+                    <th>
+                        Director
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                @foreach( var item in Model)
+                {
+                    <tr>
+                        <th>@item.NombrePelicula</th>
+                        <th>@item.Genero.NombreGenero</th>
+                        <th>@item.Director.Nombre</th>
+                        <th class="text-center">
+                            <div class="w-75 btn-group" role="group">
+
+                                <a asp-controller="Pelicula" asp-action="Upsert" asp-route-Id="@item.Id" class="btn btn btn-outline-primary">Editar</a>
+                                <a asp-controller="Pelicula" asp-action="Eliminar" asp-route-Id="@item.Id" class="btn btn btn-outline-secondary">Eliminar</a>
+                            
+                            </div>
+
+                        </th>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+    else
+    {
+        <p> No hay películas registradas</p>
+    }
+
+
+
+</div>

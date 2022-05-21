@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CineCartelera.Models.Genero>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class=" conatiner p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-light">Lista de Géneros</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Genero" asp-action="Agregar" class="btn btn-primary">Nuevo Genero</a>
+            
+
+
+        </div>
+    </div>
+
+    <br />
+
+    @if(Model.Count()>0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Genero
+                    </th>
+                    <th>
+                        Orden
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                @foreach( var item in Model)
+                {
+                    <tr>
+                        <th width="50%">@item.NombreGenero</th>
+                        <th width="30%">@item.MostrarOrden</th>
+                        <th class="text-center">
+                            <div class="w-75 btn-group" role="group">
+
+                                <a asp-controller="Genero" asp-action="Editar" asp-route-Id="@item.Id" class="btn btn btn-outline-primary">Editar</a>
+                                <a asp-controller="Genero" asp-action="Eliminar" asp-route-Id="@item.Id" class="btn btn btn-outline-secondary">Eliminar</a>
+                            
+                            </div>
+
+                        </th>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+    else
+    {
+        <p> No hay generos registrados</p>
+    }
+
+
+
+</div>

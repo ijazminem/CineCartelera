@@ -1,0 +1,33 @@
+﻿@model CineCartelera.Models.Pelicula
+
+		
+	
+	
+	<div class="card mt-4 mb-3 ms-5 bg-dark filter @Model.Genero.NombreGenero.Replace(' ','_')" style="max-width: 540px;">
+	  <div class="row g-0">
+		<div class="col-md-4">
+		  <img src="@WC.ImagenRuta@Model.ImagenUrl" class="img-fluid rounded-start" alt="...">
+		</div>
+		<div class="col-md-8 text-justify">
+		  <div class="card-body">
+			<h2 class="card-title text-light">@Model.NombrePelicula</h2>
+			<p class="card-text justify "> @Model.Sinopsis</p>
+	
+			<p class="card-text">Director: @Model.Director.Nombre</p>
+			<span class="badge rounded-pill bg-primary">@Model.Genero.NombreGenero</span>
+
+			<div class="star-rating mt-2">
+			<a href="#"><i class="bi bi-star-fill"></i></a>
+			<a href="#"><i class="bi bi-star-fill"></i></a>
+			<a href="#"><i class="bi bi-star-fill"></i></a>
+			<a href="#"><i class="bi bi-star-fill"></i></a>
+			<a href="#"><i class="bi bi-star-fill"></i></a>
+			
+			</div>
+		
+
+		  </div>
+		</div>
+	  </div>
+	</div>
+	

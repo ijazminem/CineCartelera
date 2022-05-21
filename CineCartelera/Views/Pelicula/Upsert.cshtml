@@ -1,0 +1,118 @@
+﻿@model CineCartelera.Models.ViewModels.PeliculaVM
+@{
+    var titulo = "Crear Nueva Película";
+    ViewData["Title"] = "Upsert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    @if (Model.Pelicula.Id != 0)
+    {
+        titulo = "Editar Información de Película";
+        <input asp-for="Pelicula.Id" hidden/>
+    }
+
+
+    <div class="border p-3">
+        <div asp-validation-summary="ModelOnly" class="text-light"></div>
+        <div class="row">
+            <h2 class="text-info text-center">@titulo</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label asp-for="Pelicula.NombrePelicula" class="form-label">Nombre de la Película</label>
+                            <input asp-for="Pelicula.NombrePelicula" class="form-control" />
+                            <span asp-validation-for="Pelicula.NombrePelicula" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-md-8">
+                            <label asp-for="Pelicula.GeneroId" class="form-label">Género de la Película</label>
+                            <select asp-for="Pelicula.GeneroId" asp-items="@Model.GeneroLista" class="form-select"></select>
+                            <option disabled selected>Seleccione un género</option>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label asp-for="Pelicula.DirectorId" class="form-label">Director de la Película</label>
+                            <select asp-for="Pelicula.DirectorId" asp-items="@Model.DirectorLista" class="form-select"></select>
+                            <option disabled selected>Seleccione el director</option>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-md-8">
+                            <label asp-for="Pelicula.Sinopsis" class="form-label">Sinopsis de la Película</label>
+                            <textarea asp-for="Pelicula.Sinopsis" class="form-control"></textarea>
+                            <span asp-validation-for="Pelicula.Sinopsis" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-md-8">
+                            <label asp-for="Pelicula.ImagenUrl" class="form-label">Poster de la Película</label>
+                            <input  type="file" name="files" id="ImagenId" class="form-control" />
+                          
+                        </div>
+                    </div>
+
+             
+
+                    <br />
+                    <div class=" d-d-grid gap-2 d-md-block text-center">
+                        @if(Model.Pelicula.Id !=0)
+                        {
+                            <button type="submit" class="btn btn-outline-secondary">Actualizar</button>
+                        }
+                        else
+                        {
+                           <button type="submit" onclick="return validarImagen()" class="btn btn-outline-light">Crear nueva</button> 
+                        }
+                        <a asp-controller="Pelicula" asp-action="Index" class="btn btn-outline-success">Regresar</a>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-5">
+                @if (Model.Pelicula.Id != 0)
+                    {
+                     <img scr="@WC.ImagenRuta@Model.Pelicula.ImagenUrl" width="50%" />
+                }
+               
+
+            </div>
+        </div>
+
+
+</div>
+
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>
+  
+
+    function validarImagen()
+    {
+        if(document.getElementById("ImagenId").value==""){
+            swal("Error","No ha seleccionado una imagen", "error");
+            return false;
+        }
+        return true;
+    }
+    </script>
+
+
+
+}
+
